@@ -1,5 +1,2 @@
-class Profile
-    def initialize
-        
-    end
+class Profile <ActiveRecord::Base
 end

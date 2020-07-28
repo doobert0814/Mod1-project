@@ -1,10 +1,14 @@
 require 'bundler'
 Bundler.require
 
-require_all './app'
+require 'active_record'
 
-DB = {
-    :connection => SQLite3::Database.new("db/profiles.sqlite")
-}
+require_all  './app'
 
-binding.pry
+require 'sqlite3'
+require "active_record"
+
+ActiveRecord::Base.establish_connection(
+  :adapter  => 'sqlite3',
+  :database => 'development.db')
+

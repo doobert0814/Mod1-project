@@ -6,12 +6,15 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 # gem "rails"
 
-gem 'ruby2d'
+gem 'rest-client'
+gem 'json'
 gem 'pry'
-gem 'require_all'
-gem 'activerecord'
 gem 'sqlite3'
+gem 'activerecord', "~>5.2.3"
+gem 'sinatra-activerecord'
 gem 'rake'
-#gem 'ttytoolkit'
+gem 'require_all'
+gem 'tty-prompt'
+
 
 
