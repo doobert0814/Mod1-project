@@ -1,4 +1,4 @@
-require_relative './config/enviroment'
+require_relative './config/environment'
 require "sinatra/activerecord/rake"
 
 def reload!
@@ -8,4 +8,5 @@ end
 task :console do
     Pry.start
 end
+
 
