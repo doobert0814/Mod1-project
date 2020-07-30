@@ -16,6 +16,7 @@ gem 'rake'
 gem 'require_all'
 gem 'tty-prompt'
 gem 'devise'
+gem 'colorize'
 
 
 

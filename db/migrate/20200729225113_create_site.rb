@@ -6,7 +6,5 @@ class CreateSite < ActiveRecord::Migration[5.2]
     end
   end
 
-  def up
-    add_column(:profiles, :sites_id, :integer)
-  end
+
 end
