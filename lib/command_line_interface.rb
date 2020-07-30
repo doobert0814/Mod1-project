@@ -7,7 +7,7 @@ class CommandLineInterface
 
         welcome = prompt.select("Welcome to Clef") do |menu|
             menu.choice 'SignUp'
-            menu.choice "login"
+            #menu.choice "login"
             menu.choice 'Exit'
         end
 
@@ -24,6 +24,15 @@ class CommandLineInterface
         home_page
     end
 
+    def sign_up 
+        prompt = TTY::Prompt.new
+        @name = prompt.ask("What is your First Name?")
+        @password = prompt.mask("Please enter a password")
+        ans1 = prompt.yes?("Would you like to create your profile now? ")
+
+        user= User.create(name: @name, password: @password)
+    end
+
     def create_profile
         prompt = TTY::Prompt.new
         @user_name = prompt.ask("Please Create a User name", required: true)
@@ -32,40 +41,25 @@ class CommandLineInterface
         @neighborhood = prompt.ask("What neighborhood do you live in?")
         @instrument = prompt.ask("What instrument do you play?", required: true)
         @about = prompt.ask("Tell us about yourself!")
+
+        profile = Profile.create(user_name: @user_name, age: @age, 
+            identify: @identify, neighborhood: @neighborhood, 
+            instrument: @instrument, about: @about)
     end
 
-    def sign_up 
+
+    def main_menu
         prompt = TTY::Prompt.new
-        @name = prompt.ask("What is your First Name?")
-        @password = prompt.mask("Please enter a password")
-        user= User.create(name: @name, password: @password)
-        ans1 = prompt.yes?("Would you like to create your profile now? ") do |q|
-                q.suffix "Yes/No"
+        choices = [
+            {name: "Search Profiles", value: 1},
+            {name: "Delete Profile", value: 2}]
+        user_input= prompt.multi_select("Welcome to CLEF!! \n Please make a selection!", choices)
+        case user_input
+        when 1
+            puts search_all
+        when 2
+           puts delete_profile
         end
-    end
-
-    def search
-        prompt= TTY::Prompt.new
-        prompt = prompt.select("Would you like to view everyone in your area?", %w(Yes No))
-        if @ans2 == "Yes"
-            puts Profile.all 
-        end
-
-    end
-        
-
-    # def create_profile
-    #     prompt = TTY::Prompt.new
-    #     @user_name = prompt.ask("Please Create a User name", required: true)
-    #     @age = prompt.ask("Please enter your age:")
-    #     @identify = prompt.ask("How do you identify?")
-    #     @neighborhood = prompt.ask("What neighborhood do you live in?")
-    #     @instrument = prompt.ask("What instrument do you play?", required: true)
-    #     @about = prompt.ask("Tell us about yourself!")
-    # end
-
-    def view_all
-        prompt= prompt.yes?
     end
 
     def login_menu
@@ -74,16 +68,17 @@ class CommandLineInterface
         exist_password = prompt.mask("Please enter your password")
     end
 
-    def home_page
+    def search_all
+        users = Profile.all
+        puts users
+        
+    end
+
+    def delete_profile 
         prompt = TTY::Prompt.new
-        puts "Welcome to Your Home Page"
-        system("clear")
-        puts "There are blank people near you."
-        answer = prompt.yes?("Would you like to narrow your search?") do |q|
-            if answer == "Y"
-                
-            end
-        end
+        @ans = prompt.ask("Please confirm your first name: ")
+            User.destroy_by(name: @ans)
+            system("clear")
     end
 
     def exit

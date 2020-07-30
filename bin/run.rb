@@ -10,6 +10,7 @@ cli= CommandLineInterface.new
 cli.run
 
 cli.create_profile
-
-cli.search
+system("clear")
+cli.main_menu
+# cli.search_all
 
