@@ -3,14 +3,16 @@
 
 require_relative "../config/environment.rb"
 
-cli= CommandLineInterface.new
+#cli= CommandLineInterface.new
 
 
-
-cli.run
-
-cli.create_profile
 system("clear")
-cli.main_menu
-# cli.search_all
+CommandLineInterface.landing_page
+
+#CommandLineInterface.main_menu
+
+
+# cli.create_profile
+
+# cli.main_menu
 

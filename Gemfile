@@ -15,7 +15,7 @@ gem 'sinatra-activerecord'
 gem 'rake'
 gem 'require_all'
 gem 'tty-prompt'
-gem 'devise'
+gem 'tty-progressbar'
 gem 'colorize'
 
 
